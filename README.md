@@ -1,4 +1,4 @@
-k# Kasparro AI Agentic Content Generation System
+# Kasparro AI Agentic Content Generation System
 
 ## Overview
 This project demonstrates a **true multi-agent system** for automated content generation.  
