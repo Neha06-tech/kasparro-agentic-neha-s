@@ -1,22 +1,18 @@
-# Kasparro Agentic Content Generation System
+k# Kasparro AI Agentic Content Generation System
 
-This project is an **Applied AI / Agentic Content System** that automatically generates FAQ, Product, and Comparison pages for a product dataset.
+## Overview
+This project demonstrates a **true multi-agent system** for automated content generation.  
+It leverages independent agents coordinated through an orchestrator to process product data and generate machine-readable content pages (FAQ, Product, and Comparison).
 
 ## Features
-- Modular agents with clear responsibilities
-- Reusable content logic blocks
-- Template-based page generation
-- Machine-readable JSON output
-- End-to-end orchestration pipeline
-
-## Pages Generated
-1. **FAQ Page** – 5+ categorized questions about the product  
-2. **Product Description Page** – product details, benefits, usage, and pricing  
-3. **Comparison Page** – compares GlowBoost with a fictional Product B  
+- Modular agent architecture
+- Dynamic orchestration flow
+- Reusable logic blocks
+- Template-based content generation
+- Outputs in **JSON** format
 
 ## How to Run
-From the project root folder:
-
-```bash
-python3 -m orchestrator.run_pipeline
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Neha06-tech/kasparro-agentic-content-generation-system-neha-s.git
 

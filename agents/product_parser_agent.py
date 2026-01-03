@@ -1,22 +1,16 @@
 from agents.base_agent import BaseAgent
+from data.product_input import product_data
 
 class ProductParserAgent(BaseAgent):
-    """
-    Agent responsible for parsing raw product data
-    into a clean internal representation.
-    """
+    def __init__(self):
+        super().__init__(name="ProductParserAgent")
 
-    def run(self, product_data):
-        parsed_product = {
-            "name": product_data["Product Name"],
-            "concentration": product_data["Concentration"],
-            "skin_type": product_data["Skin Type"],
-            "ingredients": product_data["Key Ingredients"],
-            "benefits": product_data["Benefits"],
-            "usage": product_data["How to Use"],
-            "side_effects": product_data["Side Effects"],
-            "price": product_data["Price"]
-        }
+    def can_run(self, state):
+        return not hasattr(state, "parsed_product")
 
-        return parsed_product
+    def run(self, state):
+        # Convert raw product data to parsed object
+        parsed_product = product_data  # Can expand processing if needed
+        state.parsed_product = parsed_product
+        print("ProductParserAgent: Parsed product added to state.")
 

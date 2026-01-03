@@ -1,5 +1,7 @@
-from logic_blocks.comparison_block import compare_products
-
-def build_comparison_template(product_a, product_b):
-    return compare_products(product_a, product_b)
+def build_comparison_template(product_a, product_b, comparison=None):
+    return {
+        "product_a": product_a.get("Product Name", "Unknown"),
+        "product_b": product_b.get("Product Name", "Unknown"),
+        "comparison": comparison or {}
+    }
 

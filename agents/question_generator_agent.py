@@ -1,39 +1,21 @@
 from agents.base_agent import BaseAgent
 
 class QuestionGeneratorAgent(BaseAgent):
-    """
-    Agent responsible for generating categorized
-    user questions based on product attributes.
-    """
+    def __init__(self):
+        super().__init__(name="QuestionGeneratorAgent")
 
-    def run(self, product):
-        questions = {
-            "informational": [
-                f"What is {product['name']}?",
-                f"What does {product['concentration']} mean?",
-                "What skin types is this product suitable for?",
-                "What are the key ingredients?",
-                "What benefits does this product provide?"
-            ],
-            "usage": [
-                "How should I apply this product?",
-                "When is the best time to use this product?",
-                "Can this product be used daily?",
-                "Should sunscreen be applied after using this product?"
-            ],
-            "safety": [
-                "Is this product safe for sensitive skin?",
-                "Are there any side effects?",
-                "What should I do if irritation occurs?"
-            ],
-            "purchase": [
-                "What is the price of this product?",
-                "Is this product worth the price?"
-            ],
-            "comparison": [
-                "How does this product compare to other vitamin C serums?"
-            ]
-        }
+    def can_run(self, state):
+        return hasattr(state, "parsed_product") and not hasattr(state, "questions")
 
-        return questions
+    def run(self, state):
+        product = state.parsed_product
+        questions = [
+            f"What is {product.get('Product Name', 'this product')}?",
+            f"What are the key ingredients in {product.get('Product Name', 'this product')}?",
+            f"How should {product.get('Product Name', 'this product')} be used?",
+            f"What benefits does {product.get('Product Name', 'this product')} provide?",
+            f"Are there any side effects of {product.get('Product Name', 'this product')}?"
+        ]
+        state.questions = questions
+        print("QuestionGeneratorAgent: Questions added to state.")
 

@@ -1,21 +1,25 @@
 from agents.base_agent import BaseAgent
 from templates.comparison_template import build_comparison_template
+from logic_blocks.comparison_block import compare_ingredients_block
 
 class ComparisonPageAgent(BaseAgent):
-    """
-    Agent responsible for assembling the comparison page.
-    """
+    def __init__(self):
+        super().__init__(name="ComparisonPageAgent")
 
-    def run(self, product):
-        fictional_product_b = {
-            "name": "Radiant C Serum",
-            "ingredients": ["Vitamin C", "Niacinamide"],
-            "benefits": ["Brightening"],
-            "price": "₹799"
-        }
+    def can_run(self, state):
+        return hasattr(state, "parsed_product") and "comparison" not in getattr(state, "data", {}).get("pages", {})
 
-        return {
-            "page_type": "Comparison",
-            "content": build_comparison_template(product, fictional_product_b)
-        }
+    def run(self, state):
+        product_a = state.parsed_product
+        # Dummy product for comparison
+        product_b = {"Product Name": "Product B", "Ingredients": []}
+
+        comparison = compare_ingredients_block(product_a, product_b)
+        comparison_page = build_comparison_template(product_a, product_b, comparison)
+
+        if not hasattr(state, "data"):
+            state.data = {"pages": {}}
+        state.data["pages"]["comparison"] = comparison_page
+
+        print("ComparisonPageAgent: Comparison page added to state.")
 
